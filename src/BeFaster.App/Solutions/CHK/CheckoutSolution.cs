@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace BeFaster.App.Solutions.CHK
 {
@@ -7,6 +8,9 @@ namespace BeFaster.App.Solutions.CHK
         public static int ComputePrice(string skus)
         {
             var stockKeepingUnitRepository = new StockKeepingUnitRepository();
+            var stockKeepingUnits = new List<StockKeepingUnit>();
+            var totalPriceNoOffer = 0;
+            var totalPriceOffer = 0;
             var totalPrice = 0;
 
             var basketSkus = skus.Split(',').ToList();
@@ -18,17 +22,17 @@ namespace BeFaster.App.Solutions.CHK
                 if (stockKeepingUnit == null)
                     return -1;
 
-                if (stockKeepingUnit.HasOffer())
-                {
-
-                }
-                else
-                {
-                    totalPrice += stockKeepingUnit.Price;
-                }
+                stockKeepingUnits.Add(stockKeepingUnit);
             }
+
+            totalPriceNoOffer = stockKeepingUnits.Where(s => !s.HasOffer()).Sum(s => s.Price);
+
+            var skusWithOffer = stockKeepingUnits.Where(s => s.HasOffer());
+            
+
 
             return totalPrice;
         }
     }
 }
+
