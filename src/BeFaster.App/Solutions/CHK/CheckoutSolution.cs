@@ -10,8 +10,6 @@ namespace BeFaster.App.Solutions.CHK
         {
             var stockKeepingUnitRepository = new StockKeepingUnitRepository();
             var stockKeepingUnits = new List<StockKeepingUnit>();
-            var totalPriceNoOffer = 0;
-            var totalPriceOffer = 0;
             var totalPrice = 0;
 
             var basketSkus = skus.Split(',').ToList();
@@ -28,9 +26,7 @@ namespace BeFaster.App.Solutions.CHK
 
             totalPrice += stockKeepingUnits.Where(s => !s.HasOffer()).Sum(s => s.Price);
 
-            var skusWithOffer = stockKeepingUnits.Where(s => s.HasOffer()).GroupBy(s => s.Name);
-
-            foreach (var skuWithOffer in skusWithOffer)
+            foreach (var skuWithOffer in stockKeepingUnits.Where(s => s.HasOffer()).GroupBy(s => s.Name))
             {
                 var specialOffer = skuWithOffer.First().SpecialOffer;
                 var unitOfferApplied = (int)Math.Truncate((decimal)(skuWithOffer.Count() / specialOffer.Units));
@@ -47,4 +43,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 

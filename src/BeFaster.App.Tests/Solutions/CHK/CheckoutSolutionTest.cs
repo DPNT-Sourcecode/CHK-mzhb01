@@ -14,6 +14,14 @@ namespace BeFaster.App.Tests.Solutions.CHK
         }
 
         [Test]
+        public void ComputePrice_Returns_The_Correct_Total_Price_With_Multiple_Offers()
+        {
+            var totalPrice = CheckoutSolution.ComputePrice("A,A,A,A,A,A,A,A,B,B,C,D");
+
+            Assert.AreEqual(440, totalPrice);
+        }
+
+        [Test]
         public void ComputePrice_Returns_Minus_1_When_The_Given_Input_Is_Incorrect()
         {
             var totalPrice = CheckoutSolution.ComputePrice("F,A,A,A,B,L,C,D");
@@ -22,4 +30,5 @@ namespace BeFaster.App.Tests.Solutions.CHK
         }
     }
 }
+
 
