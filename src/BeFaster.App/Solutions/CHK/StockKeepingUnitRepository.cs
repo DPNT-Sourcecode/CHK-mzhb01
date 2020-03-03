@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace BeFaster.App.Solutions.CHK
 {
@@ -17,10 +18,11 @@ namespace BeFaster.App.Solutions.CHK
             };
         }
 
-        public IEnumerable<StockKeepingUnit> GetAll()
+        public StockKeepingUnit GetBy(string name)
         {
-            return stockKeepingUnits;
+            return stockKeepingUnits.FirstOrDefault(s => s.Name == name);
         }
     }
 }
+
 
