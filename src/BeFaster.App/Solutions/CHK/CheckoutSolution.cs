@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BeFaster.App.Solutions.CHK
@@ -25,15 +26,24 @@ namespace BeFaster.App.Solutions.CHK
                 stockKeepingUnits.Add(stockKeepingUnit);
             }
 
-            totalPriceNoOffer = stockKeepingUnits.Where(s => !s.HasOffer()).Sum(s => s.Price);
+            totalPrice += stockKeepingUnits.Where(s => !s.HasOffer()).Sum(s => s.Price);
 
             var skusWithOffer = stockKeepingUnits.Where(s => s.HasOffer()).GroupBy(s => s.Name);
-            
 
+            foreach (var skuWithOffer in skusWithOffer)
+            {
+                var specialOffer = skuWithOffer.First().SpecialOffer;
+                var unitOfferApplied = (int)Math.Truncate((decimal)(skuWithOffer.Count() / specialOffer.Units));
+
+                var priceOffer = unitOfferApplied * specialOffer.Price;
+
+                var priceNoOffer =
+                    (skuWithOffer.Count() - (unitOfferApplied * specialOffer.Units)) * skuWithOffer.First().Price;
+
+                totalPrice += priceOffer + totalPriceNoOffer;
+            }
 
             return totalPrice;
         }
     }
 }
-
-
