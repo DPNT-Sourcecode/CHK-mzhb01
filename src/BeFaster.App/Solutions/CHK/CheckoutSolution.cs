@@ -1,12 +1,16 @@
-﻿using BeFaster.Runner.Exceptions;
-
-namespace BeFaster.App.Solutions.CHK
+﻿namespace BeFaster.App.Solutions.CHK
 {
     public static class CheckoutSolution
     {
         public static int ComputePrice(string skus)
         {
-            throw new SolutionNotImplementedException();
+            var skusPriceTable = new StockKeepingUnitRepository().GetAll();
+            var totalPrice = 0;
+
+            var items = skus.Split(',');
+
+            return totalPrice;
         }
     }
 }
+

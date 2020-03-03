@@ -12,7 +12,7 @@
         public StockKeepingUnit(
             string name,
             int price,
-            SpecialOffer specialOffer)
+            SpecialOffer specialOffer = null)
         {
             Name = name;
             Price = price;
@@ -20,3 +20,4 @@
         }
     }
 }
+
