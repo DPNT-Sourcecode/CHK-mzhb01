@@ -1,4 +1,6 @@
-﻿namespace BeFaster.App.Solutions.CHK
+﻿using System;
+
+namespace BeFaster.App.Solutions.CHK
 {
     public class StockKeepingUnit
     {
@@ -18,6 +20,12 @@
             Price = price;
             SpecialOffer = specialOffer;
         }
+
+        public bool HasOffer()
+        {
+            return SpecialOffer != null;
+        }
     }
 }
+
 
