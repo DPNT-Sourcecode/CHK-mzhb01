@@ -27,7 +27,7 @@ namespace BeFaster.App.Solutions.CHK
 
             totalPriceNoOffer = stockKeepingUnits.Where(s => !s.HasOffer()).Sum(s => s.Price);
 
-            var skusWithOffer = stockKeepingUnits.Where(s => s.HasOffer());
+            var skusWithOffer = stockKeepingUnits.Where(s => s.HasOffer()).GroupBy(s => s.Name);
             
 
 
@@ -35,4 +35,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
