@@ -40,10 +40,11 @@ namespace BeFaster.App.Solutions.CHK
                 var priceNoOffer =
                     (skuWithOffer.Count() - (unitOfferApplied * specialOffer.Units)) * skuWithOffer.First().Price;
 
-                totalPrice += priceOffer + totalPriceNoOffer;
+                totalPrice += priceOffer + priceNoOffer;
             }
 
             return totalPrice;
         }
     }
 }
+
