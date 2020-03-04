@@ -132,7 +132,13 @@ namespace BeFaster.App.Tests.Solutions.CHK
 
             Assert.AreEqual(107, totalPrice);
         }
+
+        [Test]
+        public void Test()
+        {
+            var totalPrice = CheckoutSolution.Checkout("CXYZYZC");
+
+            Assert.AreEqual(122, totalPrice);
+        }
     }
 }
-
-
