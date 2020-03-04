@@ -123,9 +123,7 @@ namespace BeFaster.App.Solutions.CHK
 
                 if (remainingSkus > 0)
                 {
-                    var skus = skuGrouped.OrderByDescending(s => s).Take(remainingSkus);
-
-                    priceNoOffer += skuGrouped.OrderByDescending(s => s).Take(remainingSkus).Sum(s => s.Price);
+                    priceNoOffer += skuGrouped.OrderBy(s => s.Price).Take(remainingSkus).Sum(s => s.Price);
                 }
 
                 totalPrice += priceOffer + priceNoOffer;
@@ -135,4 +133,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 

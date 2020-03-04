@@ -134,7 +134,7 @@ namespace BeFaster.App.Tests.Solutions.CHK
         }
 
         [Test]
-        public void Test()
+        public void Checkout_Returns_The_Correct_Total_Price_With_1_Group_Discount_And_4_Full_Price()
         {
             var totalPrice = CheckoutSolution.Checkout("CXYZYZC");
 
@@ -142,3 +142,4 @@ namespace BeFaster.App.Tests.Solutions.CHK
         }
     }
 }
+
