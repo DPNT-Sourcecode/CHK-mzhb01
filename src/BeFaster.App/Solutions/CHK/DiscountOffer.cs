@@ -1,6 +1,6 @@
 ﻿namespace BeFaster.App.Solutions.CHK
 {
-    public class DiscountOffer : BaseSpecialOffer
+    public class DiscountOffer : SpecialOffer
     {
         public int? Price { get; private set; }
 
@@ -12,3 +12,4 @@
         }
     }
 }
+

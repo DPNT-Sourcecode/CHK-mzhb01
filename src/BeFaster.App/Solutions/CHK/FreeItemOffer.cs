@@ -1,6 +1,6 @@
 ﻿namespace BeFaster.App.Solutions.CHK
 {
-    public class FreeItemOffer : BaseSpecialOffer
+    public class FreeItemOffer : SpecialOffer
     {
         public char FreeItem { get; private set; }
 
@@ -12,3 +12,4 @@
         }
     }
 }
+
