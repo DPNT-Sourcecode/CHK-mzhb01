@@ -8,26 +8,7 @@ namespace BeFaster.App.Solutions.CHK
     {
         public static int ComputePrice(string skus)
         {
-            var stockKeepingUnitRepository = new StockKeepingUnitRepository();
-            var stockKeepingUnits = new List<StockKeepingUnit>();
-            var totalPrice = 0;
-
-            foreach (var sku in skus.ToCharArray().ToList())
-            {
-                var stockKeepingUnit = stockKeepingUnitRepository.GetBy(sku);
-
-                if (stockKeepingUnit == null)
-                    return -1;
-
-                stockKeepingUnits.Add(stockKeepingUnit);
-            }
-
-            totalPrice += stockKeepingUnits.Where(s => !s.HasDiscount()).Sum(s => s.Price);
-
-            RemoveFreeItems(stockKeepingUnits);
-            totalPrice = ApplyDiscount(stockKeepingUnits, totalPrice);
-
-            return totalPrice;
+            return Checkout(skus);
         }
 
         public static int Checkout(string skus)
@@ -113,5 +94,6 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
