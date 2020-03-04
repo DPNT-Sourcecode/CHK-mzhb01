@@ -26,7 +26,7 @@ namespace BeFaster.App.Tests.Solutions.CHK
         {
             var totalPrice = CheckoutSolution.ComputePrice("AAAAAAAABBCD");
 
-            Assert.AreEqual(440, totalPrice);
+            Assert.AreEqual(410, totalPrice);
         }
 
         [Test]
@@ -68,6 +68,13 @@ namespace BeFaster.App.Tests.Solutions.CHK
 
             Assert.AreEqual(20, totalPrice);
         }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_With_3_F_Item_Including_1_Free_And_One_Discount()
+        {
+            var totalPrice = CheckoutSolution.Checkout("FFFAAA");
+
+            Assert.AreEqual(150, totalPrice);
+        }
     }
 }
-
