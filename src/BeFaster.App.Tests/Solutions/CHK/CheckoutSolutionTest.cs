@@ -62,11 +62,35 @@ namespace BeFaster.App.Tests.Solutions.CHK
         }
 
         [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_With_2_F()
+        {
+            var totalPrice = CheckoutSolution.Checkout("FF");
+
+            Assert.AreEqual(20, totalPrice);
+        }
+
+        [Test]
         public void Checkout_Returns_The_Correct_Total_Price_With_3_F_Item_Including_1_Free()
         {
             var totalPrice = CheckoutSolution.Checkout("FFF");
 
             Assert.AreEqual(20, totalPrice);
+        }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_With_4_F_Item_Including_1_Free()
+        {
+            var totalPrice = CheckoutSolution.Checkout("FFFF");
+
+            Assert.AreEqual(30, totalPrice);
+        }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_With_6_F_Item_Including_2_Free()
+        {
+            var totalPrice = CheckoutSolution.Checkout("FFFFFF");
+
+            Assert.AreEqual(40, totalPrice);
         }
 
         [Test]
@@ -78,3 +102,4 @@ namespace BeFaster.App.Tests.Solutions.CHK
         }
     }
 }
+
