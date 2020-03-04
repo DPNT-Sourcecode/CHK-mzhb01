@@ -11,11 +11,11 @@ namespace BeFaster.App.Solutions.CHK
         {
             stockKeepingUnits = new List<StockKeepingUnit>
             {
-                new StockKeepingUnit('A', 50, new SpecialOffer(3, 130)),
+                new StockKeepingUnit('A', 50, new SpecialOffer(3, 130), new SpecialOffer(5, 200)),
                 new StockKeepingUnit('B', 30, new SpecialOffer(2, 45)),
                 new StockKeepingUnit('C', 20),
-                new StockKeepingUnit('D', 15)
-                new StockKeepingUnit('E', 40)
+                new StockKeepingUnit('D', 15),
+                new StockKeepingUnit('E', 40, new SpecialOffer(2, 'B'))
             };
         }
 
@@ -25,4 +25,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 

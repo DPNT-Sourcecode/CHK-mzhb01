@@ -4,6 +4,7 @@
     {
         public int Units { get; private set; }
         public int Price { get; private set; }
+        public char FreeItem { get; private set; }
 
         private SpecialOffer()
         { }
@@ -13,5 +14,12 @@
             Units = units;
             Price = price;
         }
+
+        public SpecialOffer(int units, char freeItem)
+        {
+            Units = units;
+            FreeItem = freeItem;
+        }
     }
 }
+
