@@ -36,5 +36,14 @@ namespace BeFaster.App.Tests.Solutions.CHK
 
             Assert.AreEqual(-1, totalPrice);
         }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price()
+        {
+            var totalPrice = CheckoutSolution.Checkout("AAAABDEE");
+
+            Assert.AreEqual(355, totalPrice);
+        }
     }
 }
+
