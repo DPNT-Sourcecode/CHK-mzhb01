@@ -46,9 +46,8 @@ namespace BeFaster.App.Solutions.CHK
                 stockKeepingUnits.Add(stockKeepingUnit);
             }
 
-            totalPrice += stockKeepingUnits.Where(s => !s.HasDiscount()).Sum(s => s.Price);
-
             RemoveFreeItems(stockKeepingUnits);
+            totalPrice += stockKeepingUnits.Where(s => !s.HasDiscount()).Sum(s => s.Price);
             totalPrice = ApplyDiscount(stockKeepingUnits, totalPrice);
 
             return totalPrice;
@@ -107,3 +106,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
