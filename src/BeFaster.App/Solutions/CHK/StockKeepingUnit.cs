@@ -16,12 +16,10 @@ namespace BeFaster.App.Solutions.CHK
         public StockKeepingUnit(
             char name,
             int price,
-            SpecialOffer specialOffer = null,
-            IEnumerable<SpecialOffer> specialOffers = null)
+            params SpecialOffer[] specialOffers)
         {
             Name = name;
             Price = price;
-            SpecialOffer = specialOffer;
             SpecialOffers = specialOffers;
         }
 
@@ -36,4 +34,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
