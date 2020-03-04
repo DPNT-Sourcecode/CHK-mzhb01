@@ -3,6 +3,8 @@
     public enum OfferType
     {
         discount,
-        freeItem
+        freeItem,
+        discountGroup
     }
 }
+
