@@ -7,7 +7,7 @@ namespace BeFaster.App.Solutions.CHK
     {
         public char Name { get; private set; }
         public int Price { get; private set; }
-        public IEnumerable<Discount> SpecialOffers { get; private set; }
+        public IEnumerable<DiscountOffer> SpecialOffers { get; private set; }
 
         private StockKeepingUnit()
         { }
@@ -15,7 +15,7 @@ namespace BeFaster.App.Solutions.CHK
         public StockKeepingUnit(
             char name,
             int price,
-            params Discount[] specialOffers)
+            params DiscountOffer[] specialOffers)
         {
             Name = name;
             Price = price;
@@ -33,4 +33,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 

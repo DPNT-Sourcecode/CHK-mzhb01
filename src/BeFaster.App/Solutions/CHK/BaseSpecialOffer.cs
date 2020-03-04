@@ -3,7 +3,7 @@
     public abstract class BaseSpecialOffer
     {
         public int Units { get; private set; }
-        public OfferType Type { get; private set; }
+        public OfferType Type { get; protected set; }
 
         private BaseSpecialOffer()
         { }
@@ -14,4 +14,5 @@
         }
     }
 }
+
 
