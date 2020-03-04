@@ -30,9 +30,7 @@
             Units = units;
             GroupId = groupId;
             Price = price;
+            Type = OfferType.discountGroup;
         }
     }
 }
-
-
-
