@@ -69,10 +69,10 @@ namespace BeFaster.App.Solutions.CHK
                     .OrderByDescending(o => o.Units)
                     .GroupBy(o => o.Units);
 
-                foreach (var specialOffer in groupedSpecialOffers)
+                foreach (var groupedSpecialOffer in groupedSpecialOffers)
                 {
-                    var
-                    var unitOfOfferApplied = (int)Math.Truncate((decimal)(skuWithOffer.Count() / specialOffer.Units));
+                    var specialOffer = groupedSpecialOffer.First();
+                    //var unitOfOfferApplied = (int)Math.Truncate((decimal)(specialOffer.Count() / specialOffer.Units));
                 }
             }
 
@@ -80,4 +80,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
