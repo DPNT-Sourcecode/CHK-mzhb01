@@ -23,16 +23,12 @@ namespace BeFaster.App.Solutions.CHK
             SpecialOffers = specialOffers;
         }
 
-        public bool HasOffer()
-        {
-            return SpecialOffer != null;
-        }
-
         public bool HasOffers()
         {
             return SpecialOffers.Any();
         }
     }
 }
+
 
 
