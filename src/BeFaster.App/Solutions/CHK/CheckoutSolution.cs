@@ -12,7 +12,7 @@ namespace BeFaster.App.Solutions.CHK
             var stockKeepingUnits = new List<StockKeepingUnit>();
             var totalPrice = 0;
 
-            var basketSkus = skus.Split(',').ToList();
+            var basketSkus = skus.ToCharArray().ToList();
 
             foreach (var sku in basketSkus)
             {
@@ -43,5 +43,6 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 

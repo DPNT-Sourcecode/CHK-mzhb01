@@ -8,7 +8,7 @@ namespace BeFaster.App.Tests.Solutions.CHK
         [Test]
         public void ComputePrice_Returns_The_Correct_Total_Price()
         {
-            var totalPrice = CheckoutSolution.ComputePrice("A,A,A,A,D");
+            var totalPrice = CheckoutSolution.ComputePrice("AAAAD");
 
             Assert.AreEqual(195, totalPrice);
         }
@@ -30,5 +30,6 @@ namespace BeFaster.App.Tests.Solutions.CHK
         }
     }
 }
+
 
 
