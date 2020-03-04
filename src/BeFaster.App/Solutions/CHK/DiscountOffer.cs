@@ -6,6 +6,7 @@
         public int? Price { get; private set; }
         public char FreeItem { get; private set; }
         public OfferType Type { get; private set; }
+        public int? GroupId { get; private set; }
 
         private SpecialOffer()
         { }
@@ -23,7 +24,15 @@
             FreeItem = freeItem;
             Type = OfferType.freeItem;
         }
+
+        public SpecialOffer(int units, int groupId, int price)
+        {
+            Units = units;
+            GroupId = groupId;
+            Price = price;
+        }
     }
 }
+
 
 
