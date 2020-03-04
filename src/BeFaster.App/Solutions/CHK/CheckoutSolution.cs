@@ -99,11 +99,40 @@ namespace BeFaster.App.Solutions.CHK
             var totalPrice = 0;
             var skuWithDiscountGroup = stockKeepingUnits
                 .Where(s => s.HasDiscountGroup())
+                .OrderByDescending(s => s.Price)
                 .GroupBy(s => s.SpecialOffers.FirstOrDefault(o => o.Type == OfferType.discountGroup).GroupId);
+
+            foreach (var skuGrouped in skuWithDiscountGroup)
+            {
+                var priceOffer = 0;
+                var priceNoOffer = 0;
+                var remainingSkus = skuGrouped.Count();
+                var groupedOffers = skuGrouped
+                    .First()
+                    .SpecialOffers
+                        .Where(o => o.Type == OfferType.discountGroup)
+                        .OrderByDescending(o => o.Units);
+
+                foreach (var groupedOffer in groupedOffers)
+                {
+                    var nbSkuApplied = (int)Math.Truncate((decimal)remainingSkus / groupedOffer.Units);
+                    priceOffer += nbSkuApplied * groupedOffer.Price.Value;
+
+                    remainingSkus = remainingSkus - (nbSkuApplied * groupedOffer.Units);
+                }
+
+                if (remainingSkus > 0)
+                {
+                    priceNoOffer += remainingSkus * skuGrouped.First().Price;
+                }
+
+                totalPrice += priceOffer + priceNoOffer;
+            }
 
             return totalPrice;
         }
     }
 }
+
 
 
