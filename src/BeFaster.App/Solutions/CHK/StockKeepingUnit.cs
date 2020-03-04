@@ -4,7 +4,7 @@ namespace BeFaster.App.Solutions.CHK
 {
     public class StockKeepingUnit
     {
-        public string Name { get; private set; }
+        public char Name { get; private set; }
         public int Price { get; private set; }
         public SpecialOffer SpecialOffer { get; private set; }
 
@@ -12,7 +12,7 @@ namespace BeFaster.App.Solutions.CHK
         { }
 
         public StockKeepingUnit(
-            string name,
+            char name,
             int price,
             SpecialOffer specialOffer = null)
         {
@@ -27,3 +27,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
