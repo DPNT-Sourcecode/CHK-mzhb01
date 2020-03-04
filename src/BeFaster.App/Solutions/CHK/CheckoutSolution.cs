@@ -123,7 +123,7 @@ namespace BeFaster.App.Solutions.CHK
 
                 if (remainingSkus > 0)
                 {
-                    priceNoOffer += remainingSkus * skuGrouped.First().Price;
+                    priceNoOffer += remainingSkus * skuGrouped.Last().Price;
                 }
 
                 totalPrice += priceOffer + priceNoOffer;
@@ -133,6 +133,7 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
 
 

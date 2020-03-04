@@ -116,6 +116,23 @@ namespace BeFaster.App.Tests.Solutions.CHK
 
             Assert.AreEqual(62, totalPrice);
         }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_With_2Group_Of_3_Item_Of_Group_One_For_45()
+        {
+            var totalPrice = CheckoutSolution.Checkout("XYZSTX");
+
+            Assert.AreEqual(90, totalPrice);
+        }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_With_2Group_Of_3_Item_Of_Group_One_For_45_And_One_Full_Price()
+        {
+            var totalPrice = CheckoutSolution.Checkout("XYZSTXZ");
+
+            Assert.AreEqual(107, totalPrice);
+        }
     }
 }
+
 
