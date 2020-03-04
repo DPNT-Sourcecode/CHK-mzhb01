@@ -64,18 +64,20 @@ namespace BeFaster.App.Solutions.CHK
 
             foreach (var skuWithOffer in stockKeepingUnits.Where(s => s.HasOffers()).GroupBy(s => s.Name))
             {
-                var specialOffer = skuWithOffer.First().SpecialOffer;
-                var unitOfferApplied = (int)Math.Truncate((decimal)(skuWithOffer.Count() / specialOffer.Units));
+                var groupedSpecialOffers = skuWithOffer
+                    .SelectMany(s => s.SpecialOffers)
+                    .OrderByDescending(o => o.Units)
+                    .GroupBy(o => o.Units);
 
-                var priceOffer = unitOfferApplied * specialOffer.Price;
-
-                var priceNoOffer =
-                    (skuWithOffer.Count() - (unitOfferApplied * specialOffer.Units)) * skuWithOffer.First().Price;
-
-                totalPrice += priceOffer + priceNoOffer;
+                foreach (var specialOffer in groupedSpecialOffers)
+                {
+                    var
+                    var unitOfOfferApplied = (int)Math.Truncate((decimal)(skuWithOffer.Count() / specialOffer.Units));
+                }
             }
 
             return totalPrice;
         }
     }
 }
+
