@@ -31,5 +31,11 @@ namespace BeFaster.App.Solutions.CHK
         {
             return SpecialOffers.Where(o => o.Type == OfferType.freeItem).Any();
         }
+
+        public bool HasDiscountGroup()
+        {
+            return SpecialOffers.Where(o => o.Type == OfferType.discountGroup).Any();
+        }
     }
 }
+
