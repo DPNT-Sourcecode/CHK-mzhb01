@@ -1,12 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeFaster.App.Solutions.CHK
+﻿namespace BeFaster.App.Solutions.CHK
 {
-    class BaseSpecialOffer
+    public abstract class BaseSpecialOffer
     {
+        public int Units { get; private set; }
+        public OfferType Type { get; private set; }
+
+        private BaseSpecialOffer()
+        { }
+
+        public BaseSpecialOffer(int units)
+        {
+            Units = units;
+        }
     }
 }
+
