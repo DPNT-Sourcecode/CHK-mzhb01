@@ -38,11 +38,27 @@ namespace BeFaster.App.Tests.Solutions.CHK
         }
 
         [Test]
-        public void Checkout_Returns_The_Correct_Total_Price()
+        public void Checkout_Returns_The_Correct_Total_Price_With_19_A_Items_And_Discounts_Applied()
         {
-            var totalPrice = CheckoutSolution.Checkout("AAAAAAAAAAAAAAAAAAABDEE");
+            var totalPrice = CheckoutSolution.Checkout("AAAAAAAAAAAAAAAAAAA");
 
-            Assert.AreEqual(355, totalPrice);
+            Assert.AreEqual(780, totalPrice);
+        }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_One_B_FreeItem()
+        {
+            var totalPrice = CheckoutSolution.Checkout("AAAAAAAABEE");
+
+            Assert.AreEqual(410, totalPrice);
+        }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_One_B_FreeItem_And_One_B_Full_Price()
+        {
+            var totalPrice = CheckoutSolution.Checkout("AAAAAAAABBEE");
+
+            Assert.AreEqual(440, totalPrice);
         }
     }
 }

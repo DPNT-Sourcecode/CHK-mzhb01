@@ -7,7 +7,6 @@ namespace BeFaster.App.Solutions.CHK
     {
         public char Name { get; private set; }
         public int Price { get; private set; }
-        public SpecialOffer SpecialOffer { get; private set; }
         public IEnumerable<SpecialOffer> SpecialOffers { get; private set; }
 
         private StockKeepingUnit()
@@ -23,9 +22,14 @@ namespace BeFaster.App.Solutions.CHK
             SpecialOffers = specialOffers;
         }
 
-        public bool HasOffers()
+        public bool HasDiscount()
         {
-            return SpecialOffers.Any();
+            return SpecialOffers.Where(o => o.Type == OfferType.discount).Any();
+        }
+
+        public bool HasFreeItem()
+        {
+            return SpecialOffers.Where(o => o.Type == OfferType.freeItem).Any();
         }
     }
 }

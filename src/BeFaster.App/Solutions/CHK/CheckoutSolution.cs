@@ -12,9 +12,7 @@ namespace BeFaster.App.Solutions.CHK
             var stockKeepingUnits = new List<StockKeepingUnit>();
             var totalPrice = 0;
 
-            var basketSkus = skus.ToCharArray().ToList();
-
-            foreach (var sku in basketSkus)
+            foreach (var sku in skus.ToCharArray().ToList())
             {
                 var stockKeepingUnit = stockKeepingUnitRepository.GetBy(sku);
 
@@ -24,20 +22,10 @@ namespace BeFaster.App.Solutions.CHK
                 stockKeepingUnits.Add(stockKeepingUnit);
             }
 
-            totalPrice += stockKeepingUnits.Where(s => !s.HasOffers()).Sum(s => s.Price);
+            totalPrice += stockKeepingUnits.Where(s => !s.HasDiscount()).Sum(s => s.Price);
 
-            foreach (var skuWithOffer in stockKeepingUnits.Where(s => s.HasOffers()).GroupBy(s => s.Name))
-            {
-                var specialOffer = skuWithOffer.First().SpecialOffer;
-                var unitOfferApplied = (int)Math.Truncate((decimal)(skuWithOffer.Count() / specialOffer.Units));
-
-                var priceOffer = unitOfferApplied * specialOffer.Price;
-
-                var priceNoOffer =
-                    (skuWithOffer.Count() - (unitOfferApplied * specialOffer.Units)) * skuWithOffer.First().Price;
-
-                totalPrice += priceOffer + priceNoOffer;
-            }
+            RemoveFreeItems(stockKeepingUnits);
+            totalPrice = ApplyDiscount(stockKeepingUnits, totalPrice);
 
             return totalPrice;
         }
@@ -48,9 +36,7 @@ namespace BeFaster.App.Solutions.CHK
             var stockKeepingUnits = new List<StockKeepingUnit>();
             var totalPrice = 0;
 
-            var basketSkus = skus.ToCharArray().ToList();
-
-            foreach (var sku in basketSkus)
+            foreach (var sku in skus.ToCharArray().ToList())
             {
                 var stockKeepingUnit = stockKeepingUnitRepository.GetBy(sku);
 
@@ -60,25 +46,64 @@ namespace BeFaster.App.Solutions.CHK
                 stockKeepingUnits.Add(stockKeepingUnit);
             }
 
-            totalPrice += stockKeepingUnits.Where(s => !s.HasOffers()).Sum(s => s.Price);
+            totalPrice += stockKeepingUnits.Where(s => !s.HasDiscount()).Sum(s => s.Price);
 
-            foreach (var skuWithOffer in stockKeepingUnits.Where(s => s.HasOffers()).GroupBy(s => s.Name))
+            RemoveFreeItems(stockKeepingUnits);
+            totalPrice = ApplyDiscount(stockKeepingUnits, totalPrice);
+
+            return totalPrice;
+        }
+
+        private static int ApplyDiscount(List<StockKeepingUnit> stockKeepingUnits, int totalPrice)
+        {
+            foreach (var skuGrouped in stockKeepingUnits.Where(s => s.HasDiscount()).GroupBy(s => s.Name))
             {
-                var groupedSpecialOffers = skuWithOffer
-                    .SelectMany(s => s.SpecialOffers)
-                    .OrderByDescending(o => o.Units)
-                    .GroupBy(o => o.Units);
+                var priceOffer = 0;
+                var priceNoOffer = 0;
+                var remainingSkus = skuGrouped.Count();
+                var groupedOffers = skuGrouped
+                    .First()
+                    .SpecialOffers
+                        .Where(o => o.Type == OfferType.discount)
+                        .OrderByDescending(o => o.Units);
 
-                foreach (var groupedSpecialOffer in groupedSpecialOffers)
+                foreach (var groupedOffer in groupedOffers)
                 {
-                    var specialOffer = groupedSpecialOffer.First();
-                    //var unitOfOfferApplied = (int)Math.Truncate((decimal)(specialOffer.Count() / specialOffer.Units));
+                    var nbSkuApplied = (int)Math.Truncate((decimal)remainingSkus / groupedOffer.Units);
+                    priceOffer += nbSkuApplied * groupedOffer.Price.Value;
+
+                    remainingSkus = remainingSkus - (nbSkuApplied * groupedOffer.Units);
                 }
+
+                if (remainingSkus > 0)
+                {
+                    priceNoOffer += remainingSkus * skuGrouped.First().Price;
+                }
+
+                totalPrice += priceOffer + priceNoOffer;
             }
 
             return totalPrice;
         }
+
+        private static void RemoveFreeItems(List<StockKeepingUnit> stockKeepingUnits)
+        {
+            var skuFreeItems = stockKeepingUnits.Where(s => s.HasFreeItem()).GroupBy(s => s.Name);
+
+            foreach (var skuFreeItem in skuFreeItems)
+            {
+                var offers = skuFreeItem.First().SpecialOffers.OrderByDescending(o => o.Units);
+
+                foreach (var offer in offers)
+                {
+                    var nbFreeItem = (int)Math.Truncate((decimal)skuFreeItem.Count() / offer.Units);
+
+                    stockKeepingUnits.Where(s => s.Name == offer.FreeItem)
+                        .Take(nbFreeItem)
+                        .ToList()
+                        .ForEach(s => stockKeepingUnits.Remove(s));
+                }
+            }
+        }
     }
 }
-
-
