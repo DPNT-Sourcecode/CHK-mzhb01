@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BeFaster.App.Solutions.CHK
+﻿namespace BeFaster.App.Solutions.CHK
 {
-    class GroupOffer
+    public class GroupOffer
     {
+
     }
 }
+
