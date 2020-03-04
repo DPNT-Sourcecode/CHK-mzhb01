@@ -108,5 +108,14 @@ namespace BeFaster.App.Tests.Solutions.CHK
 
             Assert.AreEqual(45, totalPrice);
         }
+
+        [Test]
+        public void Checkout_Returns_The_Correct_Total_Price_Any_3_Item_Of_Group_One_For_45_And_One_Full_Price()
+        {
+            var totalPrice = CheckoutSolution.Checkout("XYZS");
+
+            Assert.AreEqual(62, totalPrice);
+        }
     }
 }
+
