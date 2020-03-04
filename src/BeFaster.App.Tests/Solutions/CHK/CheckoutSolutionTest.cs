@@ -40,10 +40,11 @@ namespace BeFaster.App.Tests.Solutions.CHK
         [Test]
         public void Checkout_Returns_The_Correct_Total_Price()
         {
-            var totalPrice = CheckoutSolution.Checkout("AAAABDEE");
+            var totalPrice = CheckoutSolution.Checkout("AAAAAAAAAAAAAAAAAAABDEE");
 
             Assert.AreEqual(355, totalPrice);
         }
     }
 }
+
 
