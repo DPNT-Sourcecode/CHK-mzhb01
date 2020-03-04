@@ -16,7 +16,7 @@ namespace BeFaster.App.Solutions.CHK
                 new StockKeepingUnit('C', 20),
                 new StockKeepingUnit('D', 15),
                 new StockKeepingUnit('E', 40, new SpecialOffer(2, 'B')),
-                new StockKeepingUnit('F', 10, new SpecialOffer(2, 'F'))
+                new StockKeepingUnit('F', 10, new SpecialOffer(3, 'F'))
             };
         }
 
@@ -26,3 +26,4 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
