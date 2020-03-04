@@ -41,5 +41,11 @@ namespace BeFaster.App.Solutions.CHK
 
             return totalPrice;
         }
+
+        public static int Checkout(string skus)
+        {
+
+        }
     }
 }
+
