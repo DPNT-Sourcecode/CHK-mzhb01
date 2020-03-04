@@ -44,8 +44,11 @@ namespace BeFaster.App.Solutions.CHK
 
         public static int Checkout(string skus)
         {
+            var totalPrice = 0;
 
+            return totalPrice;
         }
     }
 }
+
 
