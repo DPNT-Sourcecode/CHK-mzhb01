@@ -97,9 +97,13 @@ namespace BeFaster.App.Solutions.CHK
         private static int ApplyDiscountGroup(List<StockKeepingUnit> stockKeepingUnits)
         {
             var totalPrice = 0;
+            var skuWithDiscountGroup = stockKeepingUnits
+                .Where(s => s.HasDiscountGroup())
+                .GroupBy(s => s.SpecialOffers.FirstOrDefault(o => o.Type == OfferType.discountGroup).GroupId);
 
             return totalPrice;
         }
     }
 }
+
 
