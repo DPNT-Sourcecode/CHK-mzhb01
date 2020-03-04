@@ -47,10 +47,17 @@ namespace BeFaster.App.Solutions.CHK
             }
 
             RemoveFreeItems(stockKeepingUnits);
-            totalPrice += stockKeepingUnits.Where(s => !s.HasDiscount()).Sum(s => s.Price);
+
+            var totalPriceNoOffer = CalculTotalPriceWithoutOffer(stockKeepingUnits);
+
             totalPrice = ApplyDiscount(stockKeepingUnits, totalPrice);
 
-            return totalPrice;
+            return totalPriceNoOffer + totalPrice;
+        }
+
+        private static int CalculTotalPriceWithoutOffer(List<StockKeepingUnit> stockKeepingUnits)
+        {
+            return stockKeepingUnits.Where(s => !s.HasDiscount()).Sum(s => s.Price);
         }
 
         private static int ApplyDiscount(List<StockKeepingUnit> stockKeepingUnits, int totalPrice)
@@ -106,4 +113,5 @@ namespace BeFaster.App.Solutions.CHK
         }
     }
 }
+
 
